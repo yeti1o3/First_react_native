@@ -1,23 +1,17 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
-import type {PropsWithChildren} from 'react';
 import {
-  Button,
-  Text,
   View,
 } from 'react-native';
-import Counter from './Counter';
+import Counter from './src/component/Counter';
+import Scroll_component from './src/component/Scroll_component';
 
 
 function App(): React.JSX.Element {
   return (
-    <Counter/>
+    <View>
+      <Scroll_component/>
+      <Counter/>
+    </View>
   );
 }
 

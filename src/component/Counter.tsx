@@ -4,7 +4,7 @@ import { Text,View,Button,StyleSheet} from "react-native";
 const Counter=()=>{
     const [count,updateCount]=useState(0);
     return (<View style={styles.container}>
-        <Text style={styles.text}>your count is:{count}
+        <Text style={styles.text}>your count is  missing :{count}
         </Text>
         <Button title="Add one" onPress={()=>updateCount(count+1)}></Button>
     </View>)
