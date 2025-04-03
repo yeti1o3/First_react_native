@@ -3,8 +3,8 @@ import{View,ScrollView,StyleSheet,Text,Image, ScrollViewComponent} from 'react-n
 import Image_component from './Image_component'
 const Scroll_component = () => {
   return (
-    <ScrollView style={styles.ScrollViewComponent}>
-    <View>
+    <ScrollView nestedScrollEnabled={true} style={styles.ScrollViewComponent}>
+    <View style={{flex:1,paddingBottom:30}}>
         <Text style={styles.text}>Gaming Console</Text>
         <Image_component/>
         <Image_component/>
