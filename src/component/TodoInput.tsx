@@ -39,7 +39,8 @@ const styles=StyleSheet.create({
         borderColor:'#cccccc',
         paddingHorizontal:10,
         paddingVertical:5,
-        marginRight:10 
+        marginRight:10,
+        color:'white'
     },
     addTodoBtn:{
         backgroundColor:'#007aff',

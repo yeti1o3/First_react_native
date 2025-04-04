@@ -1,25 +1,47 @@
-import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Todo } from "../types";
 
 interface TodoItemProps{
     todo:Todo,
+    onDelete:()=>void,
+    onEdit:(id:string,text:string)=>void,
+    isCompletedTodo:()=>void,
 }
 
-const TodoItem: React.FC<TodoItemProps>=({todo})=>{
+const TodoItem: React.FC<TodoItemProps>=({todo,onDelete,onEdit,isCompletedTodo})=>{
+    const[edit,setEdit]=useState(false);
+    const[text,setText]=useState(todo.text)
+    const editPress=()=>{
+        setEdit(true);
+    }
+    const onSave=()=>{
+        onEdit(todo.id,text);
+        setEdit(false);
+    }
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.todoText}>
-                <Text style={[styles.text , todo?.completed && styles.completedText]}>{todo.text}</Text>
+            <TouchableOpacity style={styles.todoText} onPress={isCompletedTodo}>
+                {!edit&&<Text style={[styles.text , todo?.completed && styles.completedText]} >{todo.text}</Text>}
+                {edit&& <TextInput style={styles.text} placeholder={text} value={text} onChangeText={setText}></TextInput>}
             </TouchableOpacity>
-            <View style={styles.btnContainer}>
-                <TouchableOpacity style={styles.editBtn}>
+            {!edit && <View style={styles.btnContainer}>
+                {
+                !todo.completed && <TouchableOpacity style={styles.editBtn} onPress={editPress}>
                     <Text>Edit</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.deleteBtn}>
+                </TouchableOpacity>}
+                <TouchableOpacity onPress={onDelete} style={styles.deleteBtn}>
                     <Text>Delete</Text>
                 </TouchableOpacity>
-            </View>
+            </View>}
+            {
+                edit && <View style={styles.btnContainer}>
+                    <TouchableOpacity style={styles.editBtn} onPress={onSave}>
+                    <Text>Save</Text>
+                    </TouchableOpacity>
+                    </View>
+            }
+
         </View>
     )
 }

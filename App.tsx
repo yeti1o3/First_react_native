@@ -15,13 +15,23 @@ function App(): React.JSX.Element {
       completed:false
     }]) 
   }
+
+  const deleteTodo=(id:string)=>{
+    setTodoList(todoList.filter(item=>item.id!=id))
+  }
+  const editTodo=(id:string,text:string)=>{
+    setTodoList(todoList.map((item)=>item.id===id?{...item,text:text}:item))
+  }
+  const isCompletedTodo=(id:string)=>{
+    setTodoList(todoList.map((item)=>item.id===id?{...item,completed:!item.completed}:item))
+  }
   console.log(todoList);
 
   return (
     <View style={styles.container}>
       <Text style={styles.headerText}>Todo App</Text>    
       <TodoInput onAddTodo={addTodo}/>
-      <TodoList todoList={todoList}/>
+      <TodoList onDeleteTodo={deleteTodo} onEditTodo={editTodo} isCompletedTodo={isCompletedTodo} todoList={todoList}/>
     </View>
   );
 }
@@ -32,6 +42,7 @@ const styles=StyleSheet.create({
   },
   headerText:{
     fontSize:24,
+    color:'white',
     fontWeight:'bold',
     marginBottom:20,
     textAlign:'center',  
